@@ -1,5 +1,4 @@
 
-%include	/usr/lib/rpm/macros.python
 %define 	module	pytz
 
 Summary:	pytz - Olson timezone database in Python
