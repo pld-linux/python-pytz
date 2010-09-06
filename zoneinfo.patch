@@ -1,6 +1,5 @@
-diff -r -U3 pytz-2010h.orig/pytz/__init__.py pytz-2010h/pytz/__init__.py
---- pytz-2010h.orig/pytz/__init__.py	2010-04-16 07:55:52.000000000 -0500
-+++ pytz-2010h/pytz/__init__.py	2010-04-27 17:03:04.908993139 -0500
+--- pytz-2010l/pytz/__init__.py~	2010-09-06 15:31:24.000000000 +0300
++++ pytz-2010l/pytz/__init__.py	2010-09-06 15:33:02.873922171 +0300
 @@ -43,24 +43,19 @@
  except NameError:
      from sets import Set as set
@@ -30,7 +29,7 @@ diff -r -U3 pytz-2010h.orig/pytz/__init__.py pytz-2010h/pytz/__init__.py
      return open(filename, 'rb')
  
  
-@@ -453,981 +448,31 @@
+@@ -448,985 +448,30 @@
  if __name__ == '__main__':
      _test()
  
@@ -111,6 +110,7 @@ diff -r -U3 pytz-2010h.orig/pytz/__init__.py pytz-2010h/pytz/__init__.py
 - 'America/Atikokan',
 - 'America/Atka',
 - 'America/Bahia',
+- 'America/Bahia_Banderas',
 - 'America/Barbados',
 - 'America/Belem',
 - 'America/Belize',
@@ -537,6 +537,7 @@ diff -r -U3 pytz-2010h.orig/pytz/__init__.py pytz-2010h/pytz/__init__.py
 - 'Pacific/Apia',
 - 'Pacific/Auckland',
 - 'Pacific/Chatham',
+- 'Pacific/Chuuk',
 - 'Pacific/Easter',
 - 'Pacific/Efate',
 - 'Pacific/Enderbury',
@@ -562,6 +563,7 @@ diff -r -U3 pytz-2010h.orig/pytz/__init__.py pytz-2010h/pytz/__init__.py
 - 'Pacific/Pago_Pago',
 - 'Pacific/Palau',
 - 'Pacific/Pitcairn',
+- 'Pacific/Pohnpei',
 - 'Pacific/Ponape',
 - 'Pacific/Port_Moresby',
 - 'Pacific/Rarotonga',
@@ -687,6 +689,7 @@ diff -r -U3 pytz-2010h.orig/pytz/__init__.py pytz-2010h/pytz/__init__.py
 - 'America/Asuncion',
 - 'America/Atikokan',
 - 'America/Bahia',
+- 'America/Bahia_Banderas',
 - 'America/Barbados',
 - 'America/Belem',
 - 'America/Belize',
@@ -976,6 +979,7 @@ diff -r -U3 pytz-2010h.orig/pytz/__init__.py pytz-2010h/pytz/__init__.py
 - 'Pacific/Apia',
 - 'Pacific/Auckland',
 - 'Pacific/Chatham',
+- 'Pacific/Chuuk',
 - 'Pacific/Easter',
 - 'Pacific/Efate',
 - 'Pacific/Enderbury',
@@ -1001,14 +1005,13 @@ diff -r -U3 pytz-2010h.orig/pytz/__init__.py pytz-2010h/pytz/__init__.py
 - 'Pacific/Pago_Pago',
 - 'Pacific/Palau',
 - 'Pacific/Pitcairn',
-- 'Pacific/Ponape',
+- 'Pacific/Pohnpei',
 - 'Pacific/Port_Moresby',
 - 'Pacific/Rarotonga',
 - 'Pacific/Saipan',
 - 'Pacific/Tahiti',
 - 'Pacific/Tarawa',
 - 'Pacific/Tongatapu',
-- 'Pacific/Truk',
 - 'Pacific/Wake',
 - 'Pacific/Wallis',
 - 'US/Alaska',
@@ -1022,7 +1025,6 @@ diff -r -U3 pytz-2010h.orig/pytz/__init__.py pytz-2010h/pytz/__init__.py
 -common_timezones = [
 -        tz for tz in common_timezones if tz in all_timezones]
 -        
-+
 +common_timezones = [l.split()[2]
 +                    for l in open(os.path.join(_tzinfo_dir, "zone.tab"))
 +                    if l != "" and l[0] != "#"]\
