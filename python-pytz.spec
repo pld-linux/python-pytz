@@ -1,3 +1,6 @@
+# NOTE
+# - as we use system tzdata package, keeping this pkg up to the latest is
+#   pointless if only data has changed
 %define 	module	pytz
 Summary:	pytz - Olson timezone database in Python
 Summary(pl.UTF-8):	pytz - baza stref czasowych Olsona w Pythonie
@@ -29,6 +32,13 @@ przy użyciu Pythona w wersji co najmniej 2.3.
 
 %prep
 %setup -q -n %{module}-%{version}
+
+# strip zones list before patching
+mv pytz/__init__.py pytz/__init__.py.old
+cat pytz/__init__.py.old | \
+%{__sed} -e "/^all_timezones = \\\/,/^ 'WET',/d" | %{__sed} -e "/^common_timezones = \\\/,/ 'UTC'/d" \
+> pytz/__init__.py
+
 %patch0 -p1
 
 %build
