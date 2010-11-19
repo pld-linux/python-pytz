@@ -64,5 +64,5 @@
 +     'US/Mountain',
 +     'US/Pacific',
 +     'UTC']
-+common_timezones.sort()        
++common_timezones.sort()
  common_timezones_set = set(common_timezones)
