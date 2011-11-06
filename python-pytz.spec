@@ -5,19 +5,19 @@
 Summary:	pytz - Olson timezone database in Python
 Summary(pl.UTF-8):	pytz - baza stref czasowych Olsona w Pythonie
 Name:		python-%{module}
-Version:	2011g
+Version:	2011n
 Release:	1
-License:	BSD
+License:	MIT
 Group:		Libraries/Python
 Source0:	http://pypi.python.org/packages/source/p/pytz/%{module}-%{version}.tar.bz2
-# Source0-md5:	1f34447b943da98566b9d7cdaf0a8ace
+# Source0-md5:	6322c068f0497c82216ed36f6873e9d0
 Patch0:		zoneinfo.patch
 URL:		http://sourceforge.net/projects/pytz/
 BuildRequires:	python-devel >= 1:2.3
-BuildRequires:	python
+BuildRequires:	python >= 1:2.3
 BuildRequires:	rpmbuild(macros) >= 1.469
-Requires:	python >= 2.3
-Requires:	tzdata
+Requires:	python >= 1:2.3
+Requires:	tzdata >= %{version}
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -29,7 +29,7 @@ higher.
 %description -l pl.UTF-8
 pytz dodaje do Pythona moduł umożliwiający odpytywanie bazy stref
 czasowych Olsona. Moduł ten umożliwia przeprowadzanie dokładnych,
-niezależnych od platformy obliczeń uwzględniających strefy czasowy
+niezależnych od platformy obliczeń uwzględniających strefy czasowe
 przy użyciu Pythona w wersji co najmniej 2.3.
 
 %prep
@@ -54,7 +54,7 @@ rm -rf $RPM_BUILD_ROOT
 	--optimize=2 \
 	--root=$RPM_BUILD_ROOT \
 
-rm -rf $RPM_BUILD_ROOT%{py_sitescriptdir}/pytz/zoneinfo
+%{__rm} -r $RPM_BUILD_ROOT%{py_sitescriptdir}/pytz/zoneinfo
 
 %py_postclean
 
@@ -63,6 +63,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README.txt
+%doc CHANGES.txt LICENSE.txt README.txt
 %{py_sitescriptdir}/pytz
 %{py_sitescriptdir}/pytz-%{version}-py*.egg-info
