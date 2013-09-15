@@ -1,8 +1,8 @@
---- pytz-2010l/pytz/__init__.py	2010-11-19 12:30:02.768226674 +0200
-+++ pytz-2010l.new/pytz/__init__.py	2010-11-19 12:28:59.587810671 +0200
-@@ -43,24 +43,19 @@
- except NameError:
-     from sets import Set as set
+--- pytz-2013d/pytz/__init__.py.orig	2013-09-15 18:04:41.913643693 +0200
++++ pytz-2013d/pytz/__init__.py	2013-09-15 18:06:35.450305595 +0200
+@@ -77,24 +77,19 @@
+         """
+         return s.encode('US-ASCII')
  
 +_tzinfo_dir = os.getenv("TZDIR") or "/usr/share/zoneinfo"
 +if _tzinfo_dir.endswith(os.sep):
@@ -29,13 +29,12 @@
      return open(filename, 'rb')
  
  
-@@ -453,12 +448,30 @@
+@@ -489,11 +484,32 @@
  if __name__ == '__main__':
      _test()
  
-- 'Zulu']
--all_timezones = [
--        tz for tz in all_timezones if resource_exists(tz)]
+-all_timezones = LazyList(
+-        tz for tz in all_timezones if resource_exists(tz))
 +all_timezones = []
 +for root, dirs, files in os.walk(_tzinfo_dir):
 +    for exclude in "posix", "right":
@@ -48,10 +47,10 @@
 +                         and "." not in file)
 +all_timezones.sort()
          
- all_timezones_set = set(all_timezones)
--common_timezones = [
--        tz for tz in common_timezones if tz in all_timezones]
--        
+ all_timezones_set = LazySet(all_timezones)
+-common_timezones = LazyList(
+-            tz for tz in common_timezones if tz in all_timezones)
++
 +common_timezones = [l.split()[2]
 +                    for l in open(os.path.join(_tzinfo_dir, "zone.tab"))
 +                    if l != "" and l[0] != "#"]\
@@ -65,4 +64,5 @@
 +     'US/Pacific',
 +     'UTC']
 +common_timezones.sort()
- common_timezones_set = set(common_timezones)
+         
+ common_timezones_set = LazySet(common_timezones)

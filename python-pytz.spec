@@ -10,14 +10,15 @@
 Summary:	pytz - Olson timezone database in Python
 Summary(pl.UTF-8):	pytz - baza stref czasowych Olsona w Pythonie
 Name:		python-%{module}
-Version:	2013b
+Version:	2013d
 Release:	1
 License:	MIT
 Group:		Libraries/Python
 Source0:	http://pypi.python.org/packages/source/p/pytz/%{module}-%{version}.tar.bz2
-# Source0-md5:	34f47470eedd5cd1faf6c3da2741967b
+# Source0-md5:	634c5fab45c6ebaf35985acf0080011f
 Patch0:		zoneinfo.patch
 URL:		http://pytz.sourceforge.net/
+BuildRequires:	sed >= 4.0
 %if %{with python2}
 BuildRequires:	python-devel >= 1:2.3
 BuildRequires:	python >= 1:2.3
@@ -64,10 +65,8 @@ przy użyciu Pythona 3.x
 %setup -q -n %{module}-%{version}
 
 # strip zones list before patching
-mv pytz/__init__.py pytz/__init__.py.old
-cat pytz/__init__.py.old | \
-%{__sed} -e "/^all_timezones = \\\/,/^ 'WET',/d" | %{__sed} -e "/^common_timezones = \\\/,/ 'UTC'/d" \
-> pytz/__init__.py
+%{__sed} -i -e "/^all_timezones = \\\\/,/^ 'Zulu'/d" \
+	-e "/^common_timezones = \\\\/,/ 'UTC'/d" pytz/__init__.py
 
 %patch0 -p1
 
