@@ -10,12 +10,12 @@
 Summary:	pytz - Olson timezone database in Python
 Summary(pl.UTF-8):	pytz - baza stref czasowych Olsona w Pythonie
 Name:		python-%{module}
-Version:	2014.4
+Version:	2014.7
 Release:	1
-License:	MIT
+License:	MIT or ZPL v2.1
 Group:		Libraries/Python
 Source0:	https://pypi.python.org/packages/source/p/pytz/%{module}-%{version}.tar.bz2
-# Source0-md5:	69078b2e80eeb4e74c4c93089a101bcc
+# Source0-md5:	5c1d3966406c6637b95d1eb2652cd8e1
 Patch0:		zoneinfo.patch
 URL:		http://pytz.sourceforge.net/
 BuildRequires:	sed >= 4.0
