@@ -75,11 +75,11 @@ przy użyciu Pythona 3.x
 
 %build
 %if %{with python2}
-%{__python} setup.py build --build-base py2
+%py_build --build-base py2
 %py_lint
 %endif
 %if %{with python3}
-%{__python3} setup.py build --build-base py3
+%py3_build --build-base py3
 %endif
 
 %install
