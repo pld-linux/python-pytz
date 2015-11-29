@@ -29,7 +29,7 @@ BuildRequires:	python-setuptools
 BuildRequires:	python3-devel
 BuildRequires:	python3-setuptools
 %endif
-BuildRequires:	rpmbuild(macros) >= 1.469
+BuildRequires:	rpmbuild(macros) >= 1.710
 %if %{with python2}
 Requires:	python >= 1:2.3
 %endif
