@@ -35,7 +35,7 @@ BuildRequires:	rpmbuild(macros) >= 1.710
 %if %{with python2}
 Requires:	python >= 1:2.3
 %endif
-Requires:	tzdata >= %{olsonver}
+Requires:	tzdata-zoneinfo >= %{olsonver}
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -54,7 +54,7 @@ przy użyciu Pythona w wersji co najmniej 2.3.
 Summary:	pytz - Olson timezone database in Python 3.x
 Summary(pl.UTF-8):	pytz - baza stref czasowych Olsona w Pythonie 3.x
 Group:		Libraries/Python
-Requires:	tzdata >= %{olsonver}
+Requires:	tzdata-zoneinfo >= %{olsonver}
 
 %description -n python3-%{module}
 pytz brings the Olson tz database into Python. This library allows
