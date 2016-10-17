@@ -9,15 +9,16 @@
 #   newer version anyway, through egg dependencies
 %define 	module		pytz
 %define 	pypi_name	pytz
+%define 	olsonver	2016g
 Summary:	pytz - Olson timezone database in Python
 Summary(pl.UTF-8):	pytz - baza stref czasowych Olsona w Pythonie
 Name:		python-%{module}
-Version:	2016.4
+Version:	2016.7
 Release:	1
 License:	MIT or ZPL v2.1
 Group:		Libraries/Python
 Source0:	https://files.pythonhosted.org/packages/source/p/%{pypi_name}/%{pypi_name}-%{version}.tar.bz2
-# Source0-md5:	e56283d61935963157aebc5135206a47
+# Source0-md5:	8d8121d619a43cf0b38a4195de1cb8a5
 Patch0:		zoneinfo.patch
 URL:		http://pytz.sourceforge.net/
 BuildRequires:	sed >= 4.0
@@ -34,7 +35,7 @@ BuildRequires:	rpmbuild(macros) >= 1.710
 %if %{with python2}
 Requires:	python >= 1:2.3
 %endif
-Requires:	tzdata >= %{version}
+Requires:	tzdata >= %{olsonver}
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -53,7 +54,7 @@ przy użyciu Pythona w wersji co najmniej 2.3.
 Summary:	pytz - Olson timezone database in Python 3.x
 Summary(pl.UTF-8):	pytz - baza stref czasowych Olsona w Pythonie 3.x
 Group:		Libraries/Python
-Requires:	tzdata >= %{version}
+Requires:	tzdata >= %{olsonver}
 
 %description -n python3-%{module}
 pytz brings the Olson tz database into Python. This library allows
