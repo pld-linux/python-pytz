@@ -76,6 +76,9 @@ przy użyciu Pythona 3.x
 %patch0 -p1
 
 %build
+v=$(sed -rne "s/^OLSON_VERSION = '(.+)'/\1/p" pytz/__init__.py)
+test "$v" = "%{olsonver}"
+
 %if %{with python2}
 %py_build
 %py_lint
