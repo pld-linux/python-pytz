@@ -7,7 +7,8 @@
 # - as we use system tzdata package, keeping this pkg up to the latest is
 #   pointless if only data has changed, but other packages may require
 #   newer version anyway, through egg dependencies
-%define 	module	pytz
+%define 	module		pytz
+%define 	pypi_name	pytz
 Summary:	pytz - Olson timezone database in Python
 Summary(pl.UTF-8):	pytz - baza stref czasowych Olsona w Pythonie
 Name:		python-%{module}
@@ -15,14 +16,14 @@ Version:	2016.4
 Release:	1
 License:	MIT or ZPL v2.1
 Group:		Libraries/Python
-Source0:	https://pypi.python.org/packages/f4/7d/7c0c85e9c64a75dde11bc9d3e1adc4e09a42ce7cdb873baffa1598118709/%{module}-%{version}.tar.bz2
+Source0:	https://files.pythonhosted.org/packages/source/p/%{pypi_name}/%{pypi_name}-%{version}.tar.bz2
 # Source0-md5:	e56283d61935963157aebc5135206a47
 Patch0:		zoneinfo.patch
 URL:		http://pytz.sourceforge.net/
 BuildRequires:	sed >= 4.0
 %if %{with python2}
-BuildRequires:	python-devel >= 1:2.3
 BuildRequires:	python >= 1:2.3
+BuildRequires:	python-devel >= 1:2.3
 BuildRequires:	python-setuptools
 %endif
 %if %{with python3}
