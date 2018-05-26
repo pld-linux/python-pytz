@@ -1,46 +1,51 @@
---- pytz-2016.7/pytz/__init__.py~	2016-10-17 23:41:37.000000000 +0300
-+++ pytz-2016.7/pytz/__init__.py	2016-10-17 23:44:26.782524661 +0300
-@@ -70,30 +70,18 @@
-         """
+--- pytz-2018.4/pytz/__init__.py.orig	2018-05-26 18:14:11.777750792 +0200
++++ pytz-2018.4/pytz/__init__.py	2018-05-26 19:37:10.177693947 +0200
+@@ -74,12 +74,13 @@
          return s.encode('ASCII')
+ 
  
 +_tzinfo_dir = os.getenv("TZDIR") or "/usr/share/zoneinfo"
 +if _tzinfo_dir.endswith(os.sep):
 +    _tzinfo_dir = _tzinfo_dir[:-1]
- 
++
  def open_resource(name):
      """Open a resource from the zoneinfo subdir for reading.
--
+ 
 -    Uses the pkg_resources module if available and no standard file
 -    found at the calculated location.
-     """
-     name_parts = name.lstrip('/').split('/')
-     for part in name_parts:
-         if part == os.path.pardir or os.path.sep in part:
-             raise ValueError('Bad path segment: %r' % part)
--    filename = os.path.join(os.path.dirname(__file__),
--                            'zoneinfo', *name_parts)
--    if not os.path.exists(filename):
--        # http://bugs.launchpad.net/bugs/383171 - we avoid using this
--        # unless absolutely necessary to help when a broken version of
--        # pkg_resources is installed.
--        try:
--            from pkg_resources import resource_stream
--        except ImportError:
--            resource_stream = None
 -
--        if resource_stream is not None:
--            return resource_stream(__name__, 'zoneinfo/' + name)
-+    filename = os.path.join(_tzinfo_dir, *name_parts)
+     It is possible to specify different location for zoneinfo
+     subdir by using the PYTZ_TZDATADIR environment variable.
+     """
+@@ -91,19 +92,7 @@
+     if zoneinfo_dir is not None:
+         filename = os.path.join(zoneinfo_dir, *name_parts)
+     else:
+-        filename = os.path.join(os.path.dirname(__file__),
+-                                'zoneinfo', *name_parts)
+-        if not os.path.exists(filename):
+-            # http://bugs.launchpad.net/bugs/383171 - we avoid using this
+-            # unless absolutely necessary to help when a broken version of
+-            # pkg_resources is installed.
+-            try:
+-                from pkg_resources import resource_stream
+-            except ImportError:
+-                resource_stream = None
+-
+-            if resource_stream is not None:
+-                return resource_stream(__name__, 'zoneinfo/' + name)
++        filename = os.path.join(_tzinfo_dir, *name_parts)
      return open(filename, 'rb')
  
  
-@@ -489,11 +484,32 @@
+@@ -484,11 +473,33 @@
+ 
  if __name__ == '__main__':
      _test()
- 
 -all_timezones = LazyList(
 -        tz for tz in all_timezones if resource_exists(tz))
+-        
++
 +all_timezones = []
 +for root, dirs, files in os.walk(_tzinfo_dir):
 +    for exclude in "posix", "right":
@@ -52,7 +57,7 @@
 +                         if file != "README" and file != "Theory"
 +                         and "." not in file)
 +all_timezones.sort()
-         
++
  all_timezones_set = LazySet(all_timezones)
 -common_timezones = LazyList(
 -            tz for tz in common_timezones if tz in all_timezones)
