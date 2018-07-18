@@ -4,37 +4,37 @@
 %bcond_without	python3	# Python 3.x modules
 %bcond_without	tests	# unit tests
 #
-# NOTE
+# NOTE:
 # - as we use system tzdata package, keeping this pkg up to the latest is
-#   pointless if only data has changed, but other packages may require
-#   newer version anyway, through egg dependencies
+#   pointless if only data has changed
+# - ...but other packages may require newer version anyway, through egg dependencies
 %define 	module		pytz
 %define 	pypi_name	pytz
-%define 	olsonver	2018d
+%define 	olsonver	2018e
 Summary:	pytz - Olson timezone database in Python
 Summary(pl.UTF-8):	pytz - baza stref czasowych Olsona w Pythonie
 Name:		python-%{module}
-Version:	2018.4
-Release:	2
+Version:	2018.5
+Release:	1
 License:	MIT or ZPL v2.1
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/pytz/
 Source0:	https://files.pythonhosted.org/packages/source/p/pytz/%{pypi_name}-%{version}.tar.gz
-# Source0-md5:	f054437920c895dd14a4509fabafe029
+# Source0-md5:	45409cbfa3927bdd2f3ee914dd5b1060
 Patch0:		zoneinfo.patch
 URL:		http://pytz.sourceforge.net/
 BuildRequires:	rpmbuild(macros) >= 1.714
 BuildRequires:	sed >= 4.0
 %if %{with python2}
 BuildRequires:	python >= 1:2.3
-BuildRequires:	python-devel >= 1:2.3
+BuildRequires:	python-devel >= 1:2.4
 BuildRequires:	python-setuptools
 %endif
 %if %{with python3}
 BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-setuptools
 %endif
-Requires:	python-modules >= 1:2.3
+Requires:	python-modules >= 1:2.4
 Requires:	tzdata-zoneinfo >= %{olsonver}
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
