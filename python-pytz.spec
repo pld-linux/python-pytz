@@ -10,17 +10,17 @@
 # - ...but other packages may require newer version anyway, through egg dependencies
 %define 	module		pytz
 %define 	pypi_name	pytz
-%define 	olsonver	2018e
+%define 	olsonver	2018g
 Summary:	pytz - Olson timezone database in Python
 Summary(pl.UTF-8):	pytz - baza stref czasowych Olsona w Pythonie
 Name:		python-%{module}
-Version:	2018.5
+Version:	2018.7
 Release:	1
 License:	MIT or ZPL v2.1
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/pytz/
 Source0:	https://files.pythonhosted.org/packages/source/p/pytz/%{pypi_name}-%{version}.tar.gz
-# Source0-md5:	45409cbfa3927bdd2f3ee914dd5b1060
+# Source0-md5:	4b91594c440aa20c76ac92043efa75e1
 Patch0:		zoneinfo.patch
 URL:		http://pytz.sourceforge.net/
 BuildRequires:	rpmbuild(macros) >= 1.714
