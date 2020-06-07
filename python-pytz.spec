@@ -9,18 +9,18 @@
 #   pointless if only data has changed
 # - ...but other packages may require newer version anyway, through egg dependencies
 %define 	module		pytz
-%define 	pypi_name	pytz
-%define 	olsonver	2019c
+# pytz/__init__.py /OLSON_VERSION
+%define 	olsonver	2020a
 Summary:	pytz - Olson timezone database in Python
 Summary(pl.UTF-8):	pytz - baza stref czasowych Olsona w Pythonie
 Name:		python-%{module}
-Version:	2019.3
+Version:	2020.1
 Release:	1
 License:	MIT or ZPL v2.1
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/pytz/
-Source0:	https://files.pythonhosted.org/packages/source/p/pytz/%{pypi_name}-%{version}.tar.gz
-# Source0-md5:	c3d84a465fc56a4edd52cca8873ac0df
+Source0:	https://files.pythonhosted.org/packages/source/p/pytz/pytz-%{version}.tar.gz
+# Source0-md5:	0349106ac02f2bfe565dd6d5594e3a15
 Patch0:		zoneinfo.patch
 URL:		http://pytz.sourceforge.net/
 BuildRequires:	rpmbuild(macros) >= 1.714
@@ -119,7 +119,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python2}
 %files
 %defattr(644,root,root,755)
-%doc LICENSE.txt README.txt
+%doc LICENSE.txt README.rst
 %{py_sitescriptdir}/pytz
 %{py_sitescriptdir}/pytz-%{version}-py*.egg-info
 %endif
@@ -127,7 +127,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python3}
 %files -n python3-%{module}
 %defattr(644,root,root,755)
-%doc LICENSE.txt README.txt
+%doc LICENSE.txt README.rst
 %{py3_sitescriptdir}/pytz
 %{py3_sitescriptdir}/pytz-%{version}-py*.egg-info
 %endif
