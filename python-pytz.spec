@@ -74,7 +74,7 @@ przy użyciu Pythona 3.x
 %{__sed} -i -e "/^all_timezones = \\\\/,/^ 'Zulu'/d" \
 	-e "/^common_timezones = \\\\/,/ 'UTC'/d" pytz/__init__.py
 
-%patch0 -p1
+%patch -P 0 -p1
 
 %build
 v=$(sed -rne "s/^OLSON_VERSION = '(.+)'/\1/p" pytz/__init__.py)
