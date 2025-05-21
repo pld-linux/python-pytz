@@ -47,7 +47,7 @@
      return _all_timezones_lower_to_standard.get(zone.lower()) or zone  # noqa
  
  
-@@ -514,608 +503,37 @@ def _test():
+@@ -514,608 +503,38 @@ def _test():
  
  if __name__ == '__main__':
      _test()
@@ -668,21 +668,22 @@
 -common_timezones = LazyList(
 -            tz for tz in common_timezones if tz in all_timezones)
 +
-+common_timezones = [
-+    l.split()[2]
-+    for l in open(os.path.join(_tzinfo_dir, "zone.tab"))
-+    if l != "" and l[0] != "#"
-+] + [
-+    "GMT",
-+    "US/Alaska",
-+    "US/Arizona",
-+    "US/Central",
-+    "US/Eastern",
-+    "US/Hawaii",
-+    "US/Mountain",
-+    "US/Pacific",
-+    "UTC",
-+]
++with open(os.path.join(_tzinfo_dir, "zone.tab")) as ztf:
++    common_timezones = [
++        l.split()[2]
++        for l in ztf
++        if l != "" and l[0] != "#"
++    ] + [
++        "GMT",
++        "US/Alaska",
++        "US/Arizona",
++        "US/Central",
++        "US/Eastern",
++        "US/Hawaii",
++        "US/Mountain",
++        "US/Pacific",
++        "UTC",
++    ]
 +common_timezones.sort()
          
  common_timezones_set = LazySet(common_timezones)
