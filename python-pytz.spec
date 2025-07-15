@@ -10,17 +10,17 @@
 # - ...but other packages may require newer version anyway, through egg dependencies
 %define		module		pytz
 # pytz/__init__.py /OLSON_VERSION
-%define		olsonver	2024a
+%define		olsonver	2025b
 Summary:	pytz - Olson timezone database in Python
 Summary(pl.UTF-8):	pytz - baza stref czasowych Olsona w Pythonie
 Name:		python-%{module}
-Version:	2024.1
-Release:	3
+Version:	2025.2
+Release:	1
 License:	MIT or ZPL v2.1
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/pytz/
 Source0:	https://files.pythonhosted.org/packages/source/p/pytz/pytz-%{version}.tar.gz
-# Source0-md5:	b26bb090d1fe96064019bf7068eeb801
+# Source0-md5:	6a7760c71e38b6c75577b34b18b89d5b
 Patch0:		zoneinfo.patch
 URL:		http://pytz.sourceforge.net/
 BuildRequires:	rpmbuild(macros) >= 1.714
@@ -70,9 +70,9 @@ przy użyciu Pythona 3.x
 %prep
 %setup -q -n %{module}-%{version}
 
-# strip zones list before patching
-%{__sed} -i -e "/^all_timezones = \\\\/,/^ 'Zulu'/d" \
-	-e "/^common_timezones = \\\\/,/ 'UTC'/d" pytz/__init__.py
+# strip zones lists before patching
+%{__sed} -i -e "/^_all_timezones_unchecked = \\\\\$/,/^ 'Zulu'\]/d" \
+	-e "/^common_timezones = \\\\\$/,/ 'UTC'/d" pytz/__init__.py
 
 %patch -P 0 -p1
 
